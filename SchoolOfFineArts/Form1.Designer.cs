@@ -44,13 +44,18 @@
             this.btnAddStudent = new System.Windows.Forms.Button();
             this.dtStudentDateOfBirth = new System.Windows.Forms.DateTimePicker();
             this.numTeacherId = new System.Windows.Forms.NumericUpDown();
+            this.dgvResults = new System.Windows.Forms.DataGridView();
+            this.label8 = new System.Windows.Forms.Label();
+            this.numTeacherAge = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.numTeacherId)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvResults)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numTeacherAge)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(0, 0);
+            this.label1.Location = new System.Drawing.Point(0, 3);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(64, 15);
             this.label1.TabIndex = 0;
@@ -59,7 +64,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(0, 42);
+            this.label2.Location = new System.Drawing.Point(0, 33);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(67, 15);
             this.label2.TabIndex = 1;
@@ -68,7 +73,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(-2, 87);
+            this.label3.Location = new System.Drawing.Point(1, 61);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(66, 15);
             this.label3.TabIndex = 2;
@@ -77,7 +82,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(445, 3);
+            this.label4.Location = new System.Drawing.Point(445, 13);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(65, 15);
             this.label4.TabIndex = 3;
@@ -112,21 +117,21 @@
             // 
             // txtTeacherFirstName
             // 
-            this.txtTeacherFirstName.Location = new System.Drawing.Point(63, 39);
+            this.txtTeacherFirstName.Location = new System.Drawing.Point(73, 30);
             this.txtTeacherFirstName.Name = "txtTeacherFirstName";
             this.txtTeacherFirstName.Size = new System.Drawing.Size(100, 23);
             this.txtTeacherFirstName.TabIndex = 8;
             // 
             // txtTeacherLastName
             // 
-            this.txtTeacherLastName.Location = new System.Drawing.Point(63, 79);
+            this.txtTeacherLastName.Location = new System.Drawing.Point(73, 58);
             this.txtTeacherLastName.Name = "txtTeacherLastName";
             this.txtTeacherLastName.Size = new System.Drawing.Size(100, 23);
             this.txtTeacherLastName.TabIndex = 9;
             // 
             // txtStudentId
             // 
-            this.txtStudentId.Location = new System.Drawing.Point(516, 0);
+            this.txtStudentId.Location = new System.Drawing.Point(516, 10);
             this.txtStudentId.Name = "txtStudentId";
             this.txtStudentId.Size = new System.Drawing.Size(100, 23);
             this.txtStudentId.TabIndex = 10;
@@ -147,7 +152,7 @@
             // 
             // btnAddTeacher
             // 
-            this.btnAddTeacher.Location = new System.Drawing.Point(62, 108);
+            this.btnAddTeacher.Location = new System.Drawing.Point(72, 116);
             this.btnAddTeacher.Name = "btnAddTeacher";
             this.btnAddTeacher.Size = new System.Drawing.Size(101, 23);
             this.btnAddTeacher.TabIndex = 14;
@@ -193,11 +198,54 @@
             0,
             0});
             // 
+            // dgvResults
+            // 
+            this.dgvResults.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvResults.Location = new System.Drawing.Point(0, 145);
+            this.dgvResults.Name = "dgvResults";
+            this.dgvResults.RowTemplate.Height = 25;
+            this.dgvResults.Size = new System.Drawing.Size(399, 150);
+            this.dgvResults.TabIndex = 18;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(12, 89);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(31, 15);
+            this.label8.TabIndex = 19;
+            this.label8.Text = "Age:";
+            // 
+            // numTeacherAge
+            // 
+            this.numTeacherAge.Location = new System.Drawing.Point(70, 87);
+            this.numTeacherAge.Maximum = new decimal(new int[] {
+            2147000000,
+            0,
+            0,
+            0});
+            this.numTeacherAge.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numTeacherAge.Name = "numTeacherAge";
+            this.numTeacherAge.Size = new System.Drawing.Size(120, 23);
+            this.numTeacherAge.TabIndex = 20;
+            this.numTeacherAge.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.numTeacherAge);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.dgvResults);
             this.Controls.Add(this.numTeacherId);
             this.Controls.Add(this.dtStudentDateOfBirth);
             this.Controls.Add(this.btnAddStudent);
@@ -217,6 +265,8 @@
             this.Name = "Form1";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.numTeacherId)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvResults)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numTeacherAge)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -240,5 +290,8 @@
         private Button btnAddStudent;
         private DateTimePicker dtStudentDateOfBirth;
         private NumericUpDown numTeacherId;
+        private DataGridView dgvResults;
+        private Label label8;
+        private NumericUpDown numTeacherAge;
     }
 }
