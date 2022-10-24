@@ -35,7 +35,9 @@ namespace SchoolOfFineArts
                     MessageBox.Show("This ID already Exists");
                     validId = false;
                 }
-                if (item.FirstName == teacher1.FirstName && item.LastName == teacher1.LastName && item.Age == teacher1.Age)
+                if (item.FirstName.Equals(teacher1.FirstName,StringComparison.OrdinalIgnoreCase) 
+                    && item.LastName.Equals(teacher1.LastName,StringComparison.OrdinalIgnoreCase)
+                    && item.Age == teacher1.Age)
                 {
                     MessageBox.Show("This User already exists.");
                     validId=false;

@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolOfFineArts", "SchoolO
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolOfFineArtsModels", "SchoolOfFineArtsModels\SchoolOfFineArtsModels.csproj", "{A4F60787-85F5-4C33-9FC2-E5522531D550}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolOfFineArtsDB", "SchoolOfFireArtsDB\SchoolOfFineArtsDB.csproj", "{3767D4C7-F7B9-4822-BD29-6207ADD8F037}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{A4F60787-85F5-4C33-9FC2-E5522531D550}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A4F60787-85F5-4C33-9FC2-E5522531D550}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A4F60787-85F5-4C33-9FC2-E5522531D550}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3767D4C7-F7B9-4822-BD29-6207ADD8F037}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3767D4C7-F7B9-4822-BD29-6207ADD8F037}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3767D4C7-F7B9-4822-BD29-6207ADD8F037}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3767D4C7-F7B9-4822-BD29-6207ADD8F037}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
