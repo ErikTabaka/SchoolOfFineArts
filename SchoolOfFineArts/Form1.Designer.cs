@@ -35,7 +35,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.txtTeacherId = new System.Windows.Forms.TextBox();
             this.txtTeacherFirstName = new System.Windows.Forms.TextBox();
             this.txtTeacherLastName = new System.Windows.Forms.TextBox();
             this.txtStudentId = new System.Windows.Forms.TextBox();
@@ -44,6 +43,8 @@
             this.btnAddTeacher = new System.Windows.Forms.Button();
             this.btnAddStudent = new System.Windows.Forms.Button();
             this.dtStudentDateOfBirth = new System.Windows.Forms.DateTimePicker();
+            this.numTeacherId = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.numTeacherId)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -109,13 +110,6 @@
             this.label7.TabIndex = 6;
             this.label7.Text = "Date Of Birth:";
             // 
-            // txtTeacherId
-            // 
-            this.txtTeacherId.Location = new System.Drawing.Point(63, 0);
-            this.txtTeacherId.Name = "txtTeacherId";
-            this.txtTeacherId.Size = new System.Drawing.Size(100, 23);
-            this.txtTeacherId.TabIndex = 7;
-            // 
             // txtTeacherFirstName
             // 
             this.txtTeacherFirstName.Location = new System.Drawing.Point(63, 39);
@@ -177,11 +171,34 @@
             this.dtStudentDateOfBirth.Size = new System.Drawing.Size(200, 23);
             this.dtStudentDateOfBirth.TabIndex = 16;
             // 
+            // numTeacherId
+            // 
+            this.numTeacherId.Location = new System.Drawing.Point(70, 1);
+            this.numTeacherId.Maximum = new decimal(new int[] {
+            2147000000,
+            0,
+            0,
+            0});
+            this.numTeacherId.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numTeacherId.Name = "numTeacherId";
+            this.numTeacherId.Size = new System.Drawing.Size(120, 23);
+            this.numTeacherId.TabIndex = 17;
+            this.numTeacherId.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.numTeacherId);
             this.Controls.Add(this.dtStudentDateOfBirth);
             this.Controls.Add(this.btnAddStudent);
             this.Controls.Add(this.btnAddTeacher);
@@ -190,7 +207,6 @@
             this.Controls.Add(this.txtStudentId);
             this.Controls.Add(this.txtTeacherLastName);
             this.Controls.Add(this.txtTeacherFirstName);
-            this.Controls.Add(this.txtTeacherId);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
@@ -200,6 +216,7 @@
             this.Controls.Add(this.label1);
             this.Name = "Form1";
             this.Text = "Form1";
+            ((System.ComponentModel.ISupportInitialize)(this.numTeacherId)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -214,7 +231,6 @@
         private Label label5;
         private Label label6;
         private Label label7;
-        private TextBox txtTeacherId;
         private TextBox txtTeacherFirstName;
         private TextBox txtTeacherLastName;
         private TextBox txtStudentId;
@@ -223,5 +239,6 @@
         private Button btnAddTeacher;
         private Button btnAddStudent;
         private DateTimePicker dtStudentDateOfBirth;
+        private NumericUpDown numTeacherId;
     }
 }
