@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.Configuration;
 using SchoolOfFineArtsModels;
 
@@ -46,7 +47,17 @@ namespace SchoolOfFireArtsDB
                     new Teacher() { Id = 5, FirstName = "Jaime", LastName = "Escalante", Age = 62 }
                 );
             });
+            var seedDate = new DateTime(1984,1,1);
+            modelBuilder.Entity<Student>(x =>
+            {
+                x.HasData(
+                    new Student() { Id = 1, FirstName = "Anne", LastName = "Sullivan", DateOfBirth = seedDate },
+                    new Student() { Id = 2, FirstName = "Maria", LastName = "Montessori", DateOfBirth = seedDate },
+                    new Student() { Id = 3, FirstName = "William", LastName = "McGuffey",  DateOfBirth = seedDate },
+                    new Student() { Id = 4, FirstName = "Emma", LastName = "Willard", DateOfBirth = seedDate },
+                    new Student() { Id = 5, FirstName = "Jaime", LastName = "Escalante", DateOfBirth = seedDate }
+                );
+            });
         }
-
     }
 }
