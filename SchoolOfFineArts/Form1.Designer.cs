@@ -1,6 +1,6 @@
 ﻿namespace SchoolOfFineArts
 {
-    partial class Form1
+    partial class Form1 : Form
     {
         /// <summary>
         ///  Required designer variable.
@@ -47,6 +47,7 @@
             this.dgvResults = new System.Windows.Forms.DataGridView();
             this.label8 = new System.Windows.Forms.Label();
             this.numTeacherAge = new System.Windows.Forms.NumericUpDown();
+            this.btnLoadTeachers = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numTeacherId)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvResults)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTeacherAge)).BeginInit();
@@ -238,11 +239,22 @@
             0,
             0});
             // 
+            // btnLoadTeachers
+            // 
+            this.btnLoadTeachers.Location = new System.Drawing.Point(516, 237);
+            this.btnLoadTeachers.Name = "btnLoadTeachers";
+            this.btnLoadTeachers.Size = new System.Drawing.Size(100, 23);
+            this.btnLoadTeachers.TabIndex = 21;
+            this.btnLoadTeachers.Text = "LoadTeachers";
+            this.btnLoadTeachers.UseVisualStyleBackColor = true;
+            this.btnLoadTeachers.Click += new System.EventHandler(this.btnLoadTeachers_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnLoadTeachers);
             this.Controls.Add(this.numTeacherAge);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.dgvResults);
@@ -293,5 +305,6 @@
         private DataGridView dgvResults;
         private Label label8;
         private NumericUpDown numTeacherAge;
+        private Button btnLoadTeachers;
     }
 }

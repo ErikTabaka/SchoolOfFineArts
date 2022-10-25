@@ -1,4 +1,6 @@
+using Microsoft.EntityFrameworkCore;
 using SchoolOfFineArtsModels;
+using SchoolOfFireArtsDB;
 using System.ComponentModel;
 
 
@@ -6,12 +8,17 @@ namespace SchoolOfFineArts
 {
     public partial class Form1 : Form
     {
+        private readonly string _cnstr;
+        private readonly DbContextOptionsBuilder _optionsBuilder;
         public Form1()
         {
             InitializeComponent();
             dgvResults.DataSource = listTeachers;
+            _cnstr = Program._configuration["ConnectionStrings:SchoolOfFineArtsDB"];
+            _optionsBuilder = new DbContextOptionsBuilder<SchoolOfFineArtsDBContext>().UseSqlServer(_cnstr);
 
         }
+        //use readonly as they are only set at form creation
 
         BindingList<Teacher> listTeachers = new BindingList<Teacher>();
         public void btnAddTeacher_Click(object sender, EventArgs e)
@@ -56,6 +63,16 @@ namespace SchoolOfFineArts
             //dgvResults.Refresh();
             //listTeachers.Add(teacher1);
             //MessageBox.Show($"FirstName: {teacher1.FirstName} , Last Name: {teacher1.LastName} , ID: {teacher1.Id}");
+        }
+
+        private void btnLoadTeachers_Click(object sender, EventArgs e)
+        {
+            using(var context = new SchoolOfFineArtsDBContext(_optionsBuilder.Options))
+            {
+                var dbTeachers = new BindingList<Teacher>(context.Teachers.ToList());
+                dgvResults.DataSource = dbTeachers;
+                dgvResults.Refresh();
+            }
         }
     }
 }
