@@ -241,7 +241,7 @@
             // 
             // btnLoadTeachers
             // 
-            this.btnLoadTeachers.Location = new System.Drawing.Point(516, 237);
+            this.btnLoadTeachers.Location = new System.Drawing.Point(12, 301);
             this.btnLoadTeachers.Name = "btnLoadTeachers";
             this.btnLoadTeachers.Size = new System.Drawing.Size(100, 23);
             this.btnLoadTeachers.TabIndex = 21;
