@@ -23,46 +23,41 @@ namespace SchoolOfFineArts
         BindingList<Teacher> listTeachers = new BindingList<Teacher>();
         public void btnAddTeacher_Click(object sender, EventArgs e)
         {
-            //Converting strings to Int or Int to Strings
-            //Converting decimal to Int for TeacherID
-            string mytext = Convert.ToString(32);
-            int myNumber = Convert.ToInt32("32");
-            var teacher1 = new Teacher();
-            teacher1.FirstName = txtFirstName.Text;
-            teacher1.LastName = txtLastName.Text;
-            teacher1.Id = Convert.ToInt32(Math.Round(numId.Value));
-            teacher1.Age = Convert.ToInt32(Math.Round(numTeacherAge.Value));
-            bool validId = true;
-
-            //does list contain id?
-            foreach (var item in listTeachers)
+            bool newObject = true;
+            if (rdoTeacher.Checked)
             {
-                if (item.Id == teacher1.Id)
+                var teacher = new Teacher();
+                teacher.Id = 0;
+                teacher.FirstName = txtFirstName.Text;
+                teacher.LastName = txtLastName.Text;
+                teacher.Age = (int)numTeacherAge.Value;
+                //Ensure teacher not in database
+                using (var context = new SchoolOfFineArtsDBContext(_optionsBuilder.Options))
                 {
-                    MessageBox.Show("This ID already Exists");
-                    validId = false;
+                    var exists = context.Teachers.SingleOrDefault(t => t.FirstName.ToLower() == teacher.FirstName.ToLower()
+                                                                 && t.LastName.ToLower() == teacher.LastName.ToLower()
+                                                                 && t.Age == teacher.Age);
+                    //if exists post error "did you mean to update"
+                    if (exists is not null)
+                    {
+                        newObject = false;
+                        MessageBox.Show("Teacher already exists, did you mean to update?");
+                    }
+                    else
+                    {
+                        //if not add teacher
+                        context.Teachers.Add(teacher);
+                        context.SaveChanges();
+                        //reload teachers
+                        var dbTeachers = new BindingList<Teacher>(context.Teachers.ToList());
+                        dgvResults.DataSource = dbTeachers;
+                        dgvResults.Refresh();
+                    }
                 }
-                if (item.FirstName.Equals(teacher1.FirstName,StringComparison.OrdinalIgnoreCase) 
-                    && item.LastName.Equals(teacher1.LastName,StringComparison.OrdinalIgnoreCase)
-                    && item.Age == teacher1.Age)
-                {
-                    MessageBox.Show("This User already exists.");
-                    validId=false;
-                }
-
             }
-            if (validId)
+            else if (rdoStudent.Checked)
             {
-                dgvResults.Refresh();
-                listTeachers.Add(teacher1);
             }
-            //if so msg box MUST BE UNIQUE ID
-            //IF NOT CONTINUE
-
-            
-            //dgvResults.Refresh();
-            //listTeachers.Add(teacher1);
-            //MessageBox.Show($"FirstName: {teacher1.FirstName} , Last Name: {teacher1.LastName} , ID: {teacher1.Id}");
         }
 
         private void btnLoadTeachers_Click(object sender, EventArgs e)
