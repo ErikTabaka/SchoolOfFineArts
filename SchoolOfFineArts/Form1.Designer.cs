@@ -45,6 +45,7 @@
             this.rdoStudent = new System.Windows.Forms.RadioButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnLoadStudents = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numId)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvResults)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTeacherAge)).BeginInit();
@@ -108,7 +109,7 @@
             this.btnAddTeacher.Name = "btnAddTeacher";
             this.btnAddTeacher.Size = new System.Drawing.Size(101, 23);
             this.btnAddTeacher.TabIndex = 14;
-            this.btnAddTeacher.Text = "Add";
+            this.btnAddTeacher.Text = "Add/Update";
             this.btnAddTeacher.UseVisualStyleBackColor = true;
             this.btnAddTeacher.Click += new System.EventHandler(this.btnAddTeacher_Click);
             // 
@@ -122,25 +123,17 @@
             // 
             // numId
             // 
+            this.numId.Enabled = false;
             this.numId.Location = new System.Drawing.Point(70, 1);
             this.numId.Maximum = new decimal(new int[] {
             2147000000,
             0,
             0,
             0});
-            this.numId.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
             this.numId.Name = "numId";
+            this.numId.ReadOnly = true;
             this.numId.Size = new System.Drawing.Size(120, 23);
             this.numId.TabIndex = 17;
-            this.numId.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
             // 
             // dgvResults
             // 
@@ -150,6 +143,8 @@
             this.dgvResults.RowTemplate.Height = 25;
             this.dgvResults.Size = new System.Drawing.Size(776, 201);
             this.dgvResults.TabIndex = 18;
+            this.dgvResults.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvResults_CellContentClick);
+            this.dgvResults.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvResults_CellContentClick);
             // 
             // lblAge
             // 
@@ -235,11 +230,22 @@
             this.btnLoadStudents.UseVisualStyleBackColor = true;
             this.btnLoadStudents.Click += new System.EventHandler(this.btnLoadStudents_Click);
             // 
+            // btnDelete
+            // 
+            this.btnDelete.Location = new System.Drawing.Point(72, 145);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(101, 23);
+            this.btnDelete.TabIndex = 26;
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnLoadStudents);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnLoadTeachers);
@@ -286,5 +292,6 @@
         private RadioButton rdoStudent;
         private Panel panel1;
         private Button btnLoadStudents;
+        private Button btnDelete;
     }
 }

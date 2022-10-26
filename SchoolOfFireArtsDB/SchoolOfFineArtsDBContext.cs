@@ -47,15 +47,16 @@ namespace SchoolOfFireArtsDB
                     new Teacher() { Id = 5, FirstName = "Jaime", LastName = "Escalante", Age = 62 }
                 );
             });
-            var seedDate = new DateTime(1984,1,1);
+            var seedDate = new DateTime(1984, 1, 1);
             modelBuilder.Entity<Student>(x =>
             {
-                x.HasData(
-                    new Student() { Id = 1, FirstName = "Anne", LastName = "Sullivan", DateOfBirth = seedDate },
-                    new Student() { Id = 2, FirstName = "Maria", LastName = "Montessori", DateOfBirth = seedDate },
-                    new Student() { Id = 3, FirstName = "William", LastName = "McGuffey",  DateOfBirth = seedDate },
-                    new Student() { Id = 4, FirstName = "Emma", LastName = "Willard", DateOfBirth = seedDate },
-                    new Student() { Id = 5, FirstName = "Jaime", LastName = "Escalante", DateOfBirth = seedDate }
+                x.HasData
+                (
+                    new Student() { Id = 1, FirstName = "Greg", LastName = "John", DateOfBirth = seedDate },
+                    new Student() { Id = 2, FirstName = "Erik", LastName = "Tabaka", DateOfBirth = seedDate },
+                    new Student() { Id = 3, FirstName = "Josh", LastName = "Benson", DateOfBirth = seedDate },
+                    new Student() { Id = 4, FirstName = "Alex", LastName = "Robinson", DateOfBirth = seedDate },
+                    new Student() { Id = 5, FirstName = "Mark", LastName = "Rimbaugh", DateOfBirth = seedDate }
                 );
             });
         }
