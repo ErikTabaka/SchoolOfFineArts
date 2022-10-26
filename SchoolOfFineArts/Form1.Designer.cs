@@ -46,6 +46,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnLoadStudents = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
+            this.btnResetForm = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numId)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvResults)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTeacherAge)).BeginInit();
@@ -240,11 +241,22 @@
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
+            // btnResetForm
+            // 
+            this.btnResetForm.Location = new System.Drawing.Point(141, 174);
+            this.btnResetForm.Name = "btnResetForm";
+            this.btnResetForm.Size = new System.Drawing.Size(75, 23);
+            this.btnResetForm.TabIndex = 27;
+            this.btnResetForm.Text = "Reset Form";
+            this.btnResetForm.UseVisualStyleBackColor = true;
+            this.btnResetForm.Click += new System.EventHandler(this.btnResetForm_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnResetForm);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnLoadStudents);
             this.Controls.Add(this.panel1);
@@ -293,5 +305,6 @@
         private Panel panel1;
         private Button btnLoadStudents;
         private Button btnDelete;
+        private Button btnResetForm;
     }
 }

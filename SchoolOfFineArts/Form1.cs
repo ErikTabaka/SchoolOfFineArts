@@ -24,32 +24,59 @@ namespace SchoolOfFineArts
         BindingList<Teacher> listTeachers = new BindingList<Teacher>();
         public void btnAddTeacher_Click(object sender, EventArgs e)
         {
-            bool newObject = true;
+            bool modified = false;
             if (rdoTeacher.Checked)
             {
                 var teacher = new Teacher();
-                teacher.Id = 0;
+                teacher.Id = Convert.ToInt32(Math.Round(numId.Value));
                 teacher.FirstName = txtFirstName.Text;
                 teacher.LastName = txtLastName.Text;
                 teacher.Age = (int)numTeacherAge.Value;
                 //Ensure teacher not in database
                 using (var context = new SchoolOfFineArtsDBContext(_optionsBuilder.Options))
                 {
-                    var exists = context.Teachers.SingleOrDefault(t => t.FirstName.ToLower() == teacher.FirstName.ToLower()
-                    && t.LastName.ToLower() == teacher.LastName.ToLower()
-                    && t.Age == teacher.Age);
+
                     //if exists post error "did you mean to update"
-                    if (exists is not null)
+                    if (teacher.Id > 0)
                     {
-                        newObject = false;
-                        MessageBox.Show("Teacher already exists, did you mean to update?");
+                        var existingTeacher = context.Teachers.SingleOrDefault(t => t.Id == teacher.Id);
+                        modified = false;
+                        if (existingTeacher != null)
+                        {
+                            existingTeacher.FirstName = teacher.FirstName;
+                            existingTeacher.LastName = teacher.LastName;
+                            existingTeacher.Age = teacher.Age;
+                            context.SaveChanges();
+                            modified = true;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Teacher not found. Could not update.");
+                        }
+
                     }
                     else
                     {
+                         var existingTeacher = context.Teachers.SingleOrDefault(t => t.FirstName.ToLower() == teacher.FirstName.ToLower()
+                            && t.LastName.ToLower() == teacher.LastName.ToLower()
+                            && t.Age == teacher.Age);
                         //if not add teacher
-                        context.Teachers.Add(teacher);
-                        context.SaveChanges();
-                        //reload teachers
+                        if (existingTeacher == null)
+                        {
+                            context.Teachers.Add(teacher);
+                            context.SaveChanges();
+                            modified = true;
+
+                        }
+                        else
+                        {
+                            MessageBox.Show("Teacher already exists, did you mean to update?");
+                        }
+                    }
+
+                    if (modified)
+                    {
+                        ResetForm();
                         var dbTeachers = new BindingList<Teacher>(context.Teachers.ToList());
                         dgvResults.DataSource = dbTeachers;
                         dgvResults.Refresh();
@@ -67,13 +94,13 @@ namespace SchoolOfFineArts
                 //Ensure teacher not in database
                 using (var context = new SchoolOfFineArtsDBContext(_optionsBuilder.Options))
                 {
-                    var exists = context.Students.SingleOrDefault(s => s.FirstName.ToLower() == s.FirstName.ToLower()
+                    var existingStudent = context.Students.SingleOrDefault(s => s.FirstName.ToLower() == s.FirstName.ToLower()
                     && s.LastName.ToLower() == student.LastName.ToLower()
                     && s.DateOfBirth == student.DateOfBirth);
                     //if exists post error "did you mean to update"
-                    if (exists is not null)
+                    if (existingStudent is not null)
                     {
-                        newObject = false;
+                        modified = false;
                         MessageBox.Show("Student already exists, did you mean to update?");
                     }
                     else
@@ -81,6 +108,7 @@ namespace SchoolOfFineArts
                         //if not add teacher
                         context.Students.Add(student);
                         context.SaveChanges();
+                        modified = true;
                         //reload teachers
                         var dbStudents = new BindingList<Student>(context.Students.ToList());
                         dgvResults.DataSource = dbStudents;
@@ -235,6 +263,19 @@ namespace SchoolOfFineArts
                 }
             dgvResults.Refresh();
 
+        }
+
+        private void btnResetForm_Click(object sender, EventArgs e)
+        {
+            ResetForm();
+        }
+
+        private void ResetForm()
+        {
+            numId.Value = 0;
+            txtFirstName.Text = string.Empty;
+            txtLastName.Text = string.Empty;
+            dgvResults.ClearSelection();
         }
     }
 }
