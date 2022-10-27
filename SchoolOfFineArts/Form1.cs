@@ -123,7 +123,7 @@ namespace SchoolOfFineArts
             LoadTeachers();
         }
 
-        private void LoadTeachers()
+        private void LoadTeachers(bool isSearch=false)
         {
             using (var context = new SchoolOfFineArtsDBContext(_optionsBuilder.Options))
             {
@@ -131,6 +131,13 @@ namespace SchoolOfFineArts
                 dgvResults.DataSource = dbTeachers;
                 dgvResults.Refresh();
                 //ResetForm();
+            }
+            if (!isSearch)
+            {
+                var tList = dgvResults.DataSource as BindingList<Teacher>;
+                cboxInstructors.Items.AddRange(tList.ToArray<Teacher>());
+                cboxInstructors.DisplayMember = "FriendlyName";
+                cboxInstructors.ValueMember = " Id";
             }
         }
 
@@ -315,13 +322,15 @@ namespace SchoolOfFineArts
         {
             LoadTeachers();
             ResetForm();
+
+
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
             if (rdoTeacher.Checked)
             {
-                LoadTeachers();
+                LoadTeachers(true);
                 var tList = dgvResults.DataSource as BindingList<Teacher>;
                 var fList = tList.Where(x => x.LastName.ToLower().Contains(txtLastName.Text.ToLower()) &&
                                              x.FirstName.ToLower().Contains(txtFirstName.Text.ToLower())).ToList();
@@ -337,6 +346,26 @@ namespace SchoolOfFineArts
                 dgvResults.DataSource = new BindingList<Student>(fList);
                 dgvResults.ClearSelection();
             }
+        }
+
+        private void numId_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnAddUpdate_Click(object sender, EventArgs e)
+        {
+            var teacher = ((Teacher)cboxInstructors.SelectedItem).Id;
         }
     }
 }

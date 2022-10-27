@@ -14,6 +14,7 @@ namespace SchoolOfFineArtsModels
         public int Age { get; set; }
         public virtual List<Course> Courses { get; set; } = new List<Course>();
 
+        public string FriendlyName => $"{FirstName} {LastName} {Id}";
   
         public override string ToString()
         {
