@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SchoolOfFireArtsDB;
 
@@ -11,9 +12,10 @@ using SchoolOfFireArtsDB;
 namespace SchoolOfFineArtsDB.Migrations
 {
     [DbContext(typeof(SchoolOfFineArtsDBContext))]
-    partial class SchoolOfFineArtsDBContextModelSnapshot : ModelSnapshot
+    [Migration("20221027152411_Create-Course-Enrollments-Table")]
+    partial class CreateCourseEnrollmentsTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -56,7 +58,7 @@ namespace SchoolOfFineArtsDB.Migrations
 
                     b.HasIndex("TeacherId");
 
-                    b.ToTable("Courses");
+                    b.ToTable("Course");
                 });
 
             modelBuilder.Entity("SchoolOfFineArtsModels.CourseEnrollment", b =>

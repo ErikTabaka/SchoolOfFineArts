@@ -120,17 +120,27 @@ namespace SchoolOfFineArts
 
         private void btnLoadTeachers_Click(object sender, EventArgs e)
         {
-            using(var context = new SchoolOfFineArtsDBContext(_optionsBuilder.Options))
+            LoadTeachers();
+        }
+
+        private void LoadTeachers()
+        {
+            using (var context = new SchoolOfFineArtsDBContext(_optionsBuilder.Options))
             {
                 var dbTeachers = new BindingList<Teacher>(context.Teachers.ToList());
                 dgvResults.DataSource = dbTeachers;
                 dgvResults.Refresh();
+                //ResetForm();
             }
         }
 
         private void rdoTeacher_CheckedChanged(object sender, EventArgs e)
         {
             ToggleControlVisibility();
+            if (rdoTeacher.Checked)
+            {
+                LoadTeachers();
+            }
         }
 
         private void ToggleControlVisibility()
@@ -144,15 +154,25 @@ namespace SchoolOfFineArts
         private void rdoStudent_CheckedChanged(object sender, EventArgs e)
         {
             ToggleControlVisibility();
+            if (rdoStudent.Checked)
+            {
+                LoadStudents();
+            }
         }
 
         private void btnLoadStudents_Click(object sender, EventArgs e)
+        {
+            LoadStudents();
+        }
+
+        private void LoadStudents()
         {
             using (var context = new SchoolOfFineArtsDBContext(_optionsBuilder.Options))
             {
                 var dbStudent = new BindingList<Student>(context.Students.ToList());
                 dgvResults.DataSource = dbStudent;
                 dgvResults.Refresh();
+                //ResetForm();
             }
         }
 
@@ -161,7 +181,6 @@ namespace SchoolOfFineArts
             int dataId = 0;
             bool isTeacher = false;
             bool isStudent = false;
-
             var theRow = dgvResults.Rows[e.RowIndex];
             //var theCell = theRow.Cells[0];
 
@@ -173,6 +192,12 @@ namespace SchoolOfFineArts
                 if (cell.OwningColumn.Name.Equals("Id", StringComparison.OrdinalIgnoreCase))
                 {
                      dataId = (int)cell.Value;
+                    if(dataId == 0)
+                    {
+                        MessageBox.Show("Bad Row clicked");
+                        ResetForm();
+                        return;
+                    }
                 }
                 if (cell.OwningColumn.Name.Equals("Age", StringComparison.OrdinalIgnoreCase))
                 {
@@ -248,6 +273,10 @@ namespace SchoolOfFineArts
                             var databaseTeachers = new BindingList<Teacher>(context.Teachers.ToList());
                             dgvResults.DataSource = databaseTeachers;
                         }
+                        else
+                        {
+                            MessageBox.Show("Teacher not found, could not Delete.");
+                        }
                     }
                     else if (rdoStudent.Checked)
                     {
@@ -258,6 +287,10 @@ namespace SchoolOfFineArts
                             context.SaveChanges();
                             var databaseStudents = new BindingList<Student>(context.Students.ToList());
                             dgvResults.DataSource = databaseStudents;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Student not found, could not Delete.");
                         }
                     }
                 }
@@ -277,5 +310,34 @@ namespace SchoolOfFineArts
             txtLastName.Text = string.Empty;
             dgvResults.ClearSelection();
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            LoadTeachers();
+            ResetForm();
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            if (rdoTeacher.Checked)
+            {
+                LoadTeachers();
+                var tList = dgvResults.DataSource as BindingList<Teacher>;
+                var fList = tList.Where(x => x.LastName.ToLower().Contains(txtLastName.Text.ToLower()) &&
+                                             x.FirstName.ToLower().Contains(txtFirstName.Text.ToLower())).ToList();
+                dgvResults.DataSource = new BindingList<Teacher>(fList);
+                dgvResults.ClearSelection();
+            }
+            else if (rdoStudent.Checked)
+            {
+                LoadStudents();
+                var tList = dgvResults.DataSource as BindingList<Student>;
+                var fList = tList.Where(x => x.LastName.ToLower().Contains(txtLastName.Text.ToLower()) &&
+                                             x.FirstName.ToLower().Contains(txtFirstName.Text.ToLower())).ToList();
+                dgvResults.DataSource = new BindingList<Student>(fList);
+                dgvResults.ClearSelection();
+            }
+        }
     }
 }
+   

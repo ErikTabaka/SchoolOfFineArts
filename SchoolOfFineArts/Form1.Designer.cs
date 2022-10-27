@@ -47,6 +47,7 @@
             this.btnLoadStudents = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnResetForm = new System.Windows.Forms.Button();
+            this.btnSearch = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numId)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvResults)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTeacherAge)).BeginInit();
@@ -139,10 +140,10 @@
             // dgvResults
             // 
             this.dgvResults.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvResults.Location = new System.Drawing.Point(12, 237);
+            this.dgvResults.Location = new System.Drawing.Point(12, 203);
             this.dgvResults.Name = "dgvResults";
             this.dgvResults.RowTemplate.Height = 25;
-            this.dgvResults.Size = new System.Drawing.Size(776, 201);
+            this.dgvResults.Size = new System.Drawing.Size(776, 235);
             this.dgvResults.TabIndex = 18;
             this.dgvResults.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvResults_CellContentClick);
             this.dgvResults.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvResults_CellContentClick);
@@ -216,7 +217,7 @@
             // 
             this.panel1.Controls.Add(this.rdoTeacher);
             this.panel1.Controls.Add(this.rdoStudent);
-            this.panel1.Location = new System.Drawing.Point(285, 3);
+            this.panel1.Location = new System.Drawing.Point(218, 3);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(175, 78);
             this.panel1.TabIndex = 24;
@@ -243,7 +244,7 @@
             // 
             // btnResetForm
             // 
-            this.btnResetForm.Location = new System.Drawing.Point(141, 174);
+            this.btnResetForm.Location = new System.Drawing.Point(79, 174);
             this.btnResetForm.Name = "btnResetForm";
             this.btnResetForm.Size = new System.Drawing.Size(75, 23);
             this.btnResetForm.TabIndex = 27;
@@ -251,11 +252,22 @@
             this.btnResetForm.UseVisualStyleBackColor = true;
             this.btnResetForm.Click += new System.EventHandler(this.btnResetForm_Click);
             // 
+            // btnSearch
+            // 
+            this.btnSearch.Location = new System.Drawing.Point(188, 174);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(78, 23);
+            this.btnSearch.TabIndex = 28;
+            this.btnSearch.Text = "Search";
+            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.btnResetForm);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnLoadStudents);
@@ -275,6 +287,7 @@
             this.Controls.Add(this.label1);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numId)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvResults)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTeacherAge)).EndInit();
@@ -306,5 +319,6 @@
         private Button btnLoadStudents;
         private Button btnDelete;
         private Button btnResetForm;
+        private Button btnSearch;
     }
 }
