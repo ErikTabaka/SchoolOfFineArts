@@ -77,9 +77,10 @@ namespace SchoolOfFineArts
                     if (modified)
                     {
                         ResetForm();
-                        var dbTeachers = new BindingList<Teacher>(context.Teachers.ToList());
-                        dgvResults.DataSource = dbTeachers;
-                        dgvResults.Refresh();
+                        //var dbTeachers = new BindingList<Teacher>(context.Teachers.ToList());
+                        //dgvResults.DataSource = dbTeachers;
+                        //dgvResults.Refresh();
+                        LoadTeachers();
                     }
                 }
             }
@@ -110,9 +111,10 @@ namespace SchoolOfFineArts
                         context.SaveChanges();
                         modified = true;
                         //reload teachers
-                        var dbStudents = new BindingList<Student>(context.Students.ToList());
-                        dgvResults.DataSource = dbStudents;
-                        dgvResults.Refresh();
+                        //var dbStudents = new BindingList<Student>(context.Students.ToList());
+                        //dgvResults.DataSource = dbStudents;
+                        //dgvResults.Refresh();
+                        LoadStudents();
                     }
                 }
             }
@@ -134,6 +136,8 @@ namespace SchoolOfFineArts
             }
             if (!isSearch)
             {
+                cboxInstructors.SelectedIndex = -1;
+                cboxInstructors.Items.Clear();
                 var tList = dgvResults.DataSource as BindingList<Teacher>;
                 cboxInstructors.Items.AddRange(tList.ToArray<Teacher>());
                 cboxInstructors.DisplayMember = "FriendlyName";
@@ -277,8 +281,9 @@ namespace SchoolOfFineArts
                         {
                             context.Teachers.Remove(d);
                             context.SaveChanges();
-                            var databaseTeachers = new BindingList<Teacher>(context.Teachers.ToList());
-                            dgvResults.DataSource = databaseTeachers;
+                            //var databaseTeachers = new BindingList<Teacher>(context.Teachers.ToList());
+                            //dgvResults.DataSource = databaseTeachers;
+                            LoadTeachers();
                         }
                         else
                         {
@@ -292,8 +297,9 @@ namespace SchoolOfFineArts
                         {
                             context.Students.Remove(d);
                             context.SaveChanges();
-                            var databaseStudents = new BindingList<Student>(context.Students.ToList());
-                            dgvResults.DataSource = databaseStudents;
+                            //var databaseStudents = new BindingList<Student>(context.Students.ToList());
+                            //dgvResults.DataSource = databaseStudents;
+                            LoadStudents();
                         }
                         else
                         {
@@ -322,6 +328,8 @@ namespace SchoolOfFineArts
         {
             LoadTeachers();
             ResetForm();
+            ResetCourseForm();
+            LoadCourses();
 
 
         }
@@ -366,6 +374,177 @@ namespace SchoolOfFineArts
         private void btnAddUpdate_Click(object sender, EventArgs e)
         {
             var teacher = ((Teacher)cboxInstructors.SelectedItem).Id;
+            //var teacher = (Teacher)cboInstructors.SelectedItem;
+            //var teacherId = teacher.Id;
+            //var teacherIdOneLine = ((Teacher)cboInstructors.SelectedItem).Id;
+
+            bool modified = false;
+            var newCourse = new Course();
+            newCourse.Id = Convert.ToInt32(txtCourseId.Text);
+            newCourse.NumCredits = Convert.ToInt32(cboxNumOfCredits.SelectedItem);
+            newCourse.Abbreviation = txtAbbreviation.Text;
+            newCourse.Department = txtDepartment.Text;
+            newCourse.TeacherId = teacher;
+            newCourse.Name = txtCourseName.Text;
+            //Ensure teacher not in database
+            //using (var context = new SchoolOfFineArtsDBContext(_optionsBuilder.Options))
+            {
+
+                //if exists post error "did you mean to update"
+                if (newCourse.Id > 0)
+                {
+                    using (var context = new SchoolOfFineArtsDBContext(_optionsBuilder.Options))
+                    {
+
+                        var existingCourse = context.Courses.SingleOrDefault(t => t.Id == newCourse.Id);
+                        modified = false;
+
+                        if (existingCourse != null)
+                        {
+                            existingCourse.NumCredits = newCourse.NumCredits;
+                            existingCourse.Abbreviation = newCourse.Abbreviation;
+                            existingCourse.TeacherId = newCourse.TeacherId;
+                            existingCourse.Name = newCourse.Name;
+                            context.SaveChanges();
+                            modified = true;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Teacher not found. Could not update.");
+                        }
+                    }
+                }
+                else
+                {
+                    using (var context = new SchoolOfFineArtsDBContext(_optionsBuilder.Options))
+                    {
+                        var existingCourse = context.Courses.SingleOrDefault(t =>
+                            t.Name.ToLower() == newCourse.Name.ToLower()
+                            && t.Abbreviation.ToLower() == newCourse.Abbreviation.ToLower()
+                            && t.TeacherId == newCourse.TeacherId);
+                        //if not add teacher
+                        if (existingCourse == null)
+                        {
+                            context.Courses.Add(newCourse);
+                            context.SaveChanges();
+                            modified = true;
+
+                        }
+                        else
+                        {
+                            MessageBox.Show("That course already exists, did you mean to update?");
+                        }
+
+                    }
+                }
+
+                if (modified)
+                {
+                    ResetCourseForm();
+                    //var dbTeachers = new BindingList<Teacher>(context.Teachers.ToList());
+                    //dgvResults.DataSource = dbTeachers;
+                    //dgvResults.Refresh();
+                    LoadCourses();
+                }
+            }
+        }
+
+        private void LoadCourses()
+        {
+            using (var context = new SchoolOfFineArtsDBContext(_optionsBuilder.Options))
+            {
+                var Courses = new BindingList<Course>(context.Courses.ToList());
+                dgvCourses.DataSource = Courses;
+                dgvCourses.Refresh();
+                //ResetForm();
+            }
+        }
+
+        private void ResetCourseForm()
+        {
+            txtCourseId.Text = "0";
+            txtCourseName.Text = string.Empty;
+            txtDepartment.Text = string.Empty;
+            txtAbbreviation.Text = string.Empty;
+            cboxInstructors.SelectedIndex = -1;
+            cboxNumOfCredits.SelectedIndex = 2;
+
+            
+        }
+
+        private void btnResetCourseForm_Click(object sender, EventArgs e)
+        {
+            ResetCourseForm();
+        }
+
+        private void tabControl1_TabIndexChanged(object sender, EventArgs e)
+        {
+            var selIndex = ((TabControl)sender).SelectedIndex;
+            switch (selIndex)
+            {
+                case 0:
+                    LoadTeachers();
+                    ResetForm();   
+                    break;
+                case 1:
+                    LoadCourses();
+                    ResetCourseForm();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void dgvCourse_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var theRow = dgvResults.Rows[e.RowIndex];
+            int dataId = 0;
+
+            foreach (DataGridViewTextBoxCell cell in theRow.Cells)
+            {
+                if (cell.OwningColumn.Name.Equals("Id", StringComparison.OrdinalIgnoreCase))
+                {
+                    dataId = (int)cell.Value;
+                    if (dataId == 0)
+                    {
+                        MessageBox.Show("Bad row clicked");
+                        ResetForm();
+                        return;
+                    }
+                }
+            }
+
+            using (var context = new SchoolOfFineArtsDBContext(_optionsBuilder.Options))
+            {
+                var d = context.Courses.SingleOrDefault(x => x.Id == dataId);
+                if (d is not null)
+                {
+                    txtCourseId.Text = d.Id.ToString();
+                    txtCourseName.Text = d.Name;
+                    txtAbbreviation.Text = d.Abbreviation;
+                    txtDepartment.Text = d.Department;
+                    foreach (var item in cboxNumOfCredits.Items)
+                    {
+                        if (Convert.ToInt32(item) == d.NumCredits)
+                        {
+                            cboxNumOfCredits.SelectedItem = item;
+                        }
+
+                    }
+                    foreach (var item in cboxInstructors.Items)
+                    {
+                        var t = (Teacher)item;
+                        if (t.Id == d.TeacherId)
+                        {
+                            cboxInstructors.SelectedItem = item;
+                        }
+
+                    }
+
+                }
+
+            }
+
         }
     }
 }
