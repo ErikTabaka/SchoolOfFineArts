@@ -453,7 +453,17 @@ namespace SchoolOfFineArts
         {
             using (var context = new SchoolOfFineArtsDBContext(_optionsBuilder.Options))
             {
-                var Courses = new BindingList<Course>(context.Courses.ToList());
+                var Courses = new BindingList<Course>(context.Courses.Include(x=>x.Teacher).ToList());
+                //var otherCourses= context.Courses.Include(x=> x.Teacher)
+                //                        .Select(y=> new
+                //                        {
+                //                            Id = y.Id,
+                //                            Name = y.Name,
+                //                            TeacherId = y.TeacherId, 
+                //                            Abbreviation = y.Abbreviation,
+                //                            Instructor = y.Teacher.FriendlyName.ToList(),
+                //                            NumCredits = y.NumCredits,
+                //                         }).ToList();
                 dgvCourses.DataSource = Courses;
                 dgvCourses.Refresh();
                 //ResetForm();
@@ -544,6 +554,42 @@ namespace SchoolOfFineArts
                 }
 
             }
+
+        }
+
+        private void btnRemoveCourse_Click(object sender, EventArgs e)
+        {
+            var id = Convert.ToInt32(txtCourseId.Text);
+            var name = txtCourseName.Text;
+            var confirmDelete = MessageBox.Show($"Are you sure you want to delete this course: {Name}",
+                "Are you sure?",
+                MessageBoxButtons.YesNo);
+            if (confirmDelete == DialogResult.Yes)
+                using (var context = new SchoolOfFineArtsDBContext(_optionsBuilder.Options))
+                {
+                        var d = context.Courses.SingleOrDefault(t => t.Id == id);
+                        if (d != null)
+                        {
+                            context.Courses.Remove(d);
+                            context.SaveChanges();
+                            //var databaseTeachers = new BindingList<Teacher>(context.Teachers.ToList());
+                            //dgvResults.DataSource = databaseTeachers;
+                            LoadCourses();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Course not found, could not Delete.");
+                        }
+                    
+
+                }
+            dgvResults.Refresh();
+            ResetCourseForm();
+
+        }
+
+        private void btnLoadCourse_Click(object sender, EventArgs e)
+        {
 
         }
     }

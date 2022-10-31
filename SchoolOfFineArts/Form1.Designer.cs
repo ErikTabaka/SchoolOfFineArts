@@ -296,7 +296,7 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(832, 615);
+            this.tabControl1.Size = new System.Drawing.Size(1064, 782);
             this.tabControl1.TabIndex = 29;
             this.tabControl1.TabIndexChanged += new System.EventHandler(this.tabControl1_TabIndexChanged);
             // 
@@ -350,7 +350,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 24);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(824, 587);
+            this.tabPage2.Size = new System.Drawing.Size(1056, 754);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Courses";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -380,7 +380,7 @@
             this.dgvCourses.Location = new System.Drawing.Point(6, 240);
             this.dgvCourses.Name = "dgvCourses";
             this.dgvCourses.RowTemplate.Height = 25;
-            this.dgvCourses.Size = new System.Drawing.Size(770, 344);
+            this.dgvCourses.Size = new System.Drawing.Size(1044, 508);
             this.dgvCourses.TabIndex = 15;
             this.dgvCourses.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCourse_CellContentClick);
             this.dgvCourses.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCourse_CellContentClick);
@@ -491,6 +491,7 @@
             this.btnRemoveCourse.TabIndex = 2;
             this.btnRemoveCourse.Text = "Remove Course";
             this.btnRemoveCourse.UseVisualStyleBackColor = true;
+            this.btnRemoveCourse.Click += new System.EventHandler(this.btnRemoveCourse_Click);
             // 
             // btnLoadCourse
             // 
@@ -500,6 +501,7 @@
             this.btnLoadCourse.TabIndex = 1;
             this.btnLoadCourse.Text = "Loaded Courses";
             this.btnLoadCourse.UseVisualStyleBackColor = true;
+            this.btnLoadCourse.Click += new System.EventHandler(this.btnLoadCourse_Click);
             // 
             // btnAddUpdate
             // 
@@ -515,7 +517,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(856, 639);
+            this.ClientSize = new System.Drawing.Size(1102, 806);
             this.Controls.Add(this.tabControl1);
             this.Name = "Form1";
             this.Text = "Form1";

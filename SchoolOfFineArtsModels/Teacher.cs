@@ -18,7 +18,7 @@ namespace SchoolOfFineArtsModels
   
         public override string ToString()
         {
-            return $"First Name: {FirstName}, Last Name: {LastName}. ID:{Id}, Age: {Age}";
+            return $"{FirstName},{LastName}";
         }
     }
 }
