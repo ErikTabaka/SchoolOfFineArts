@@ -183,6 +183,8 @@ namespace SchoolOfFineArts
                 var dbStudent = new BindingList<Student>(context.Students.ToList());
                 dgvResults.DataSource = dbStudent;
                 dgvResults.Refresh();
+                lstStudents.Items.Clear();
+                lstStudents.Items.AddRange(dbStudent.ToArray());
                 //ResetForm();
             }
         }
@@ -327,6 +329,7 @@ namespace SchoolOfFineArts
         private void Form1_Load(object sender, EventArgs e)
         {
             LoadTeachers();
+            LoadStudents();
             ResetForm();
             ResetCourseForm();
             LoadCourses();
@@ -466,6 +469,8 @@ namespace SchoolOfFineArts
                 //                         }).ToList();
                 dgvCourses.DataSource = Courses;
                 dgvCourses.Refresh();
+                dgvCourseAssignments.DataSource = Courses;
+                dgvCourseAssignments.Refresh();
                 //ResetForm();
             }
         }
