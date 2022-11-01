@@ -512,8 +512,14 @@ namespace SchoolOfFineArts
 
         private void dgvCourse_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            var theRow = dgvResults.Rows[e.RowIndex];
+            var theRow = dgvCourses.Rows[e.RowIndex];
             int dataId = 0;
+
+            //int dataId = 0;
+            //bool isTeacher = false;
+            //bool isStudent = false;
+            //var theRow = dgvResults.Rows[e.RowIndex];
+            ////var theCell = theRow.Cells[0];
 
             foreach (DataGridViewTextBoxCell cell in theRow.Cells)
             {
