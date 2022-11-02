@@ -2,6 +2,8 @@
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.Configuration;
 using SchoolOfFineArtsModels;
+using SchoolOfFineArtsModels.DTOs;
+using System.Security.Cryptography.X509Certificates;
 
 namespace SchoolOfFireArtsDB
 {
@@ -10,6 +12,7 @@ namespace SchoolOfFireArtsDB
         public DbSet<Teacher> Teachers { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<Course> Courses { get; set; }
+        public DbSet<CourseInfoDTO>CourseInfoDtos { get; set; }
         public SchoolOfFineArtsDBContext()
         {
 
@@ -59,6 +62,16 @@ namespace SchoolOfFireArtsDB
                     new Student() { Id = 5, FirstName = "Mark", LastName = "Rimbaugh", DateOfBirth = seedDate }
                 );
             });
+
+            modelBuilder.Entity<CourseInfoDTO>(x => { 
+                x.HasNoKey();
+                x.ToView("CourseInfoDtos");
+
+
+
+            });
+
+
         }
     }
 }
